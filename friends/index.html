@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="友情链接, 卑微牛馬在線分享">
-    <meta name="description" content="卑微牛馬在線分享">
+    <meta name="keywords" content="友情链接, 菜鳥一站">
+    <meta name="description" content="本科 | 软件工程 | 菜鸟一枚">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +19,7 @@
 
     
 
-    <title>友情链接 | 卑微牛馬在線分享</title>
+    <title>友情链接 | 菜鳥一站</title>
     <link rel="icon" type="image/png" href="/003.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -46,7 +46,7 @@
                     
                     <img src="/medias/004.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">卑微牛馬在線分享</span>
+                    <span class="logo-span">菜鳥一站</span>
                 </a>
             </div>
             
@@ -134,10 +134,10 @@
         
         <img src="/medias/004.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">卑微牛馬在線分享</div>
+        <div class="logo-name">菜鳥一站</div>
         <div class="logo-desc">
             
-            Never really desperate, only the lost of the soul.
+            本科 | 软件工程 | 菜鸟一枚
             
         </div>
     </div>
@@ -765,6 +765,11 @@
         left: unset;
         visibility: visible;
     }
+
+    .v[data-class="v"] .vwrap .vheader .vinput {
+      width: 32%;
+      border-bottom: 1px dashed #dedede;
+    }
 </style>
 
 <div class="card valine-card" data-aos="fade-up">
@@ -779,23 +784,61 @@
 <script src="/libs/valine/av-min.js"></script>
 <script src="/libs/valine/Valine.min.js"></script>
 <script>
-    new Valine({
+let metaPlaceholder = {"nick":"昵称/QQ号(必填)","mail":"邮箱(必填)","link":"网址(https://)"} ;
+//这里要换行
+new Valine({
         el: '#vcomments',
         appId: 'lTcSt31uKy49O7dr1arSkywI-gzGzoHsz',
         appKey: 'JX8rf5k8vj1FeGBHw95Q0vpe',
-        notify: 'false' === 'true',
+        notify: 'true' === 'true',
         verify: 'true' === 'true',
         visitor: 'true' === 'true',
         avatar: 'monsterid',
         pageSize: '10',
-        lang: 'zh-cn',
-        placeholder: '昵称填写qq可以显示qq头像和昵称哦~'
+        lang: 'zh-CN',
+        placeholder: '昵称输入QQ号可自动显示头像',
+        meta: ["nick", "mail"],
+        recordIP: 'true' === 'true',
+        enableQQ: 'monsterid',
+        requiredFields: ["489c35188723a1398b44ef0fdd90b363"],
+        master: ["489c35188723a1398b44ef0fdd90b363"],
+        friends: ["", ""],
+        tagMeta: ["博主", "小伙伴", "访客"],
+        metaPlaceholder: metaPlaceholder,
+
     });
+
+</script>
+<!-- 今日诗词：随机返回一句古诗词名句的接口，宅到用来做 Valine 的 placeholder 显示内容 -->
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<script type="text/javascript">
+ jinrishici.load(function(result) {
+     var jrsc_plac =  result.data.content + "\n「" + result.data.origin.title + "」" + result.data.origin.dynasty + " · " + result.data.origin.author;
+     document.getElementById("veditor").setAttribute("placeholder",jrsc_plac);
+ })
 </script>
 
-<!--酷Q推送-->
+    document.body.addEventListener('click', function(e) {
+        if (e.target.classList.contains('vsubmit')) {
+            const email = document.querySelector('input[type=email]');
+            const nick = document.querySelector('input[name=nick]');
+            const reg = /^[A-Za-z0-9_-\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+            if (!email.value || !nick.value || !reg.test(email.value)) {
+                const str = `<div class="valert txt-center"><div class="vtext">请填写正确的昵称和邮箱！</div></div>`;
+                const vmark = document.querySelector('.vmark');
+                vmark.innerHTML = str;
+                vmark.style.display = 'block';
 
+                e.stopPropagation();
 
+                setTimeout(function() {
+                    vmark.style.display = 'none';
+                    vmark.innerHTML = '';
+                }, 2500);
+            }
+        }
+        }, true);
+</script>
 
 
 
@@ -1083,14 +1126,6 @@ $(function () {
     
 
     <!-- 鼠标星星特效 -->
-     
-        <script type="text/javascript">
-            // 只在桌面版网页启用特效
-            var windowWidth = $(window).width();
-            if (windowWidth > 768) {
-                document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
-            }
-        </script>
     
 
      
